@@ -78,6 +78,7 @@ public class DatabasesConnetor {
 		//this is the member secition
 		}else if(MorE == 2) {
 			System.out.println("EmployeeLibrary Id:");
+			id = input.nextInt();
 			ResultSet EId = stmt.executeQuery("select e.Employee_SSN from Employee e where e.Employee_SSN =="+id);
 			if(EId.getString(1).equalsIgnoreCase(id2)) {
 				System.out.println("welcome Employee");
@@ -94,7 +95,14 @@ public class DatabasesConnetor {
 				ResultSet Order = stmt.executeQuery("insert into OrderList(BookName) values("+BookName+");");
 				Menu2();
 			}else if(EmemberChose==2) {
-				
+				ResultSet name = stmt.executeQuery("select Employee_Fname, Employee_Lname, Job, LibraryId from Employee where Employee_SSN == "+id);
+				ResultSet location = stmt.executeQuery("select LibraryName, City, State from LibraryLocation where LibraryIdLocation == "+name.getString(4));
+				while(name.next()) {
+					System.out.println("Name: "+name.getString(1)+" "+ name.getString(2));
+					System.out.println("Job: "+ name.getString(3));
+					System.out.println("location: "+ location.getString(1)+" ,"+location.getString(2)+ ", " + location.getString(3));
+				}
+				Menu2();
 			}
 		}
 	}//this will catch the error if it doesnt connect
