@@ -41,7 +41,7 @@ public class DatabasesConnetor {
 		}else {System.out.println("Wrong ID");
 		System.exit(0);}
 		Menu();
-		while(MemberChose != 3) {
+		while(MemberChose != 4) {
 		if(MemberChose == 1) {
 		System.out.println("what the name of the book: ");
 		//this will find the book by the name and find the dewDecimalnum of the book
@@ -73,7 +73,14 @@ public class DatabasesConnetor {
 			}
 			Menu();
 		}
-		else {MemberChose = 3;}
+		else if(MemberChose == 3) {
+			ResultSet MemName = stmt.executeQuery("select Member_Fname, Member_Lname, Address, MState, MCity from LibMember where Member_ID == "+ id);
+			while(MemName.next()) {
+				System.out.println("Name: "+MemName.getString(1)+" "+MemName.getString(2)+"\n");
+				System.out.println("ID: "+ id);
+				System.out.println("Address: " + MemName.getString(3)+", "+MemName.getString(4)+", "+MemName.getString(5)+"\n");
+			}
+		}
 		}
 		//this is the member secition
 		}else if(MorE == 2) {
@@ -98,8 +105,8 @@ public class DatabasesConnetor {
 				ResultSet name = stmt.executeQuery("select Employee_Fname, Employee_Lname, Job, LibraryId from Employee where Employee_SSN == "+id);
 				ResultSet location = stmt.executeQuery("select LibraryName, City, State from LibraryLocation where LibraryIdLocation == "+name.getString(4));
 				while(name.next()) {
-					System.out.println("Name: "+name.getString(1)+" "+ name.getString(2));
-					System.out.println("Job: "+ name.getString(3));
+					System.out.println("Name: "+name.getString(1)+" "+ name.getString(2)+"\n");
+					System.out.println("Job: "+ name.getString(3)+"\n");
 					System.out.println("location: "+ location.getString(1)+" ,"+location.getString(2)+ ", " + location.getString(3));
 				}
 				Menu2();
@@ -112,7 +119,8 @@ public class DatabasesConnetor {
 	public static void Menu() {
 		System.out.println("1 Book Search");
 		System.out.println("2 Return Book");
-		System.out.println("3 exit");
+		System.out.println("3 Member Information");
+		System.out.println("4 exit");
 		MemberChose = input.nextInt();
 	}
 	public static void Menu2() {
