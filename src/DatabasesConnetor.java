@@ -99,7 +99,7 @@ public class DatabasesConnetor {
 			if(EmemberChose == 1) {
 				System.out.println("what is the book Name to order?");
 				Bookname = input.nextLine();
-				ResultSet Order = stmt.executeQuery("insert into OrderList(BookName) values("+BookName+");");
+				ResultSet Order = stmt.executeQuery("insert. into OrderList(BookName) values("+BookName+");");
 				Menu2();
 			}else if(EmemberChose==2) {
 				ResultSet name = stmt.executeQuery("select Employee_Fname, Employee_Lname, Job, LibraryId from Employee where Employee_SSN == "+id);
